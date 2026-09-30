@@ -3,7 +3,7 @@
 @define-color gray    #1a1a1a;
 @define-color white   #ffffffaa;
 * {
-    font-family: "Hack", monospace;
+    font-family: "JetBrainsMono Nerd Font", monospace;
 }
 
 window {
