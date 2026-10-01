@@ -5,3 +5,4 @@ stow $FOLDERS -t $HOME
 sudo stow .root -t /
 systemctl enable --now keyd
 sudo keyd reload
+sudo usermod -aG keyd $(whoami)

@@ -160,7 +160,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 3
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -620,7 +620,7 @@ binds {
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+E { quit; }
-    Ctrl+Alt+Delete { quit; }
+    Ctrl+Alt+Delete { spawn-sh "keyd reload && niri msg action quit"; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
@@ -636,7 +636,10 @@ output "eDP-1" {
     position x=0 y=0
 }
 
-environment
+environment {
+	QT_QPA_PLATFORM "xcb"
+}
+
 spawn-sh-at-startup "swaybg -i ~/.local/share/wallpapers/chrysanthemum.jpg"
 output "HDMI-A-1" {
     mode "2560x1440@143.967"
@@ -646,3 +649,4 @@ output "HDMI-A-1" {
     transform "normal"
     position x=1670 y=-501
 }
+spawn-sh-at-startup "keyd bind 'leftmeta=overload(meta,macro(M-space))'"
