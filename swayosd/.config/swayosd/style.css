@@ -1,0 +1,18 @@
+
+window#osd {
+	border-radius: 12px;
+	border: solid 2px #ce7dff;
+	background: #111111ee;
+}
+
+window#osd progressbar {
+	background: #111111ee;
+}
+
+window#osd progressbar trough {
+    background: #111111ee;
+}
+
+window#osd progressbar progress {
+  background: #ce7dff;
+}
