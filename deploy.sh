@@ -6,5 +6,3 @@ sudo stow .root -t /
 sudo usermod -aG keyd $(whoami)
 systemctl enable --now keyd
 systemctl daemon-reload
-rm -f ~/.local/state/noctalia/settings.toml
-noctalia msg config-reload

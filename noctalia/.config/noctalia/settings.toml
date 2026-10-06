@@ -13,17 +13,11 @@ telemetry_enabled = true
     fetch_exchange_rates = false
     pinned = [ "nemo" ]
 
-[bar.default]
-margin_ends = 0
-
-[lockscreen]
-transition_duration = 300
-
 [wallpaper]
 directory = "~/.local/share/wallpapers"
 
 [wallpaper.default]
-path = "/home/student/.local/share/wallpapers/chrysanthemum.jpg"
+path = "~/.local/share/wallpapers/chrysanthemum.jpg"
 
 [widget.clock]
 format = "{:%H:%M %D}"
