@@ -1,0 +1,30 @@
+[theme]
+mode = "dark"
+shell_mode = "follow"
+source = "community"
+community_palette = "Cherry Blossom"
+
+[shell]
+font_family = "JetBrainsMono NF"
+telemetry_enabled = true
+
+    [shell.launcher]
+    app_grid = true
+    fetch_exchange_rates = false
+    pinned = [ "nemo" ]
+
+[bar.default]
+margin_ends = 0
+
+[lockscreen]
+transition_duration = 300
+
+[wallpaper]
+directory = "~/.local/share/wallpapers"
+
+[wallpaper.default]
+path = "/home/student/.local/share/wallpapers/chrysanthemum.jpg"
+
+[widget.clock]
+format = "{:%H:%M %D}"
+

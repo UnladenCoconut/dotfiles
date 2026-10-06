@@ -1,0 +1,10 @@
+[Unit]
+Description=Reset keyd on graphical session login
+PartOf=graphical-session.target
+Before=graphical-session.target
+
+[Service]
+ExecStart=keyd reload
+
+[Install]
+WantedBy=graphical-session.target

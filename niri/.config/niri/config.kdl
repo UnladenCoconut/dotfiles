@@ -63,19 +63,23 @@ input {
     }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
-    // warp-mouse-to-focus
+    warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 overview {
-	backdrop-color "#000000ff"
+	backdrop-color "transparent"
 }
 layer-rule {
 	match namespace="^wallpaper$"
 	place-within-backdrop true
+}
+
+layer-rule {
+	
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -84,9 +88,8 @@ layer-rule {
 layout {
 
 		background-color "transparent"
-
     // Set gaps around windows in logical pixels.
-    gaps 16
+    gaps 3
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -172,7 +175,7 @@ layout {
         // If you enable the border, you probably want to disable the focus ring.
         off
 
-        width 4
+        width 3
         active-color "#ffc87f"
         inactive-color "#505050"
 
@@ -318,6 +321,18 @@ window-rule {
 	open-fullscreen true
 }
 
+window-rule {
+	match app-id="^Windscribe2$"
+	open-floating true
+	draw-border-with-background false
+	border {
+		off
+    }
+	focus-ring {
+		off
+    }
+}
+
 binds {
     
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -336,7 +351,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal" { spawn "wezterm"; }
-    Super+L hotkey-overlay-title="Lock the Screen" { spawn "gtklock"; }
+    Super+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -349,24 +364,24 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume raise"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume lower"; }
-    XF86AudioMute allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute"; }
-    XF86AudioMicMute allow-when-locked=true { spawn-sh "swayosd-client --output-volume unmute"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up 10"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down 10"; }
+    XF86AudioMute allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+    XF86AudioMicMute allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
-    XF86AudioPlay allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
-    XF86AudioPause allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
-    XF86AudioStop allow-when-locked=true { spawn-sh "swayosd-client --playerctl stop"; }
-    XF86AudioPrev allow-when-locked=true { spawn-sh "swayosd-client --playerctl previous"; }
-    XF86AudioNext allow-when-locked=true { spawn-sh "swayosd-client --playerctl next"; }
+    XF86AudioPlay allow-when-locked=true { spawn-sh "noctalia msg media toggle"; }
+    XF86AudioPause allow-when-locked=true { spawn-sh "noctalia msg media pause"; }
+    XF86AudioStop allow-when-locked=true { spawn-sh "noctalia msg media stop"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "noctalia msg media previous"; }
+    XF86AudioNext allow-when-locked=true { spawn-sh "noctalia msg media next"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "swayosd-client --brightness raise"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "swayosd-client --brightness lower"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "brightnessctl --class=backlight set 10%+ -n1"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "brightnessctl --class=backlight set 10%- -n1"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -579,7 +594,7 @@ binds {
     // a matching layout switch hotkey configured in xkb options above.
     // Having both at once on the same hotkey will break the switching,
     // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-    Mod+Space { spawn-sh "niri msg action switch-layout next && swayosd-client --custom-icon keyboard --custom-message \"$(niri msg --json keyboard-layouts | jq -r '.names[.current_idx]')\""; }
+    Mod+Space { spawn-sh "niri msg action switch-layout next"; }
 
     Print { spawn-sh "QT_QPA_PLATFORM=wayland flameshot gui -r | wl-copy"; }
     Ctrl+Print { spawn-sh "QT_QPA_PLATFORM=wayland flameshot screen -r | wl-copy"; }
@@ -596,13 +611,13 @@ binds {
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Shift+E { spawn-sh "keyd reload && niri msg action quit"; }
-    Ctrl+Alt+Delete { spawn-sh "keyd reload && niri msg action quit"; }
+    Mod+Shift+E { spawn-sh "noctalia msg panel-toggle session"; }
+    Ctrl+Alt+Delete { spawn-sh "noctalia msg panel-toggle session"; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
-    Mod+Shift+Space repeat=false { spawn-sh "pkill -u \"$(whoami)\" wofi || wofi --show drun"; }
+    Mod+Shift+Space repeat=false { spawn-sh "noctalia msg panel-toggle launcher"; }
 }
 output "eDP-1" {
     mode "1920x1080@60.049"
@@ -610,7 +625,7 @@ output "eDP-1" {
     scale 1.0
 
     transform "normal"
-    position x=0 y=0
+    position x=0 y=-277
 }
 
 environment {
@@ -624,9 +639,10 @@ output "HDMI-A-1" {
     scale 1.0
 
     transform "normal"
-    position x=1670 y=-501
+    position x=1920 y=-277
 }
-spawn-sh-at-startup "keyd bind 'leftmeta=overload(meta,macro(M-S-space))'"
-spawn-at-startup "swayosd-server"
+
+spawn-sh-at-startup "keyd bind 'leftmeta = overload(meta, macro(leftmeta+leftshift+space))'"
 spawn-at-startup "wl-clip-persist -c regular"
 spawn-sh-at-startup "QT_QPA_PLATFORM=wayland flameshot"
+spawn-sh-at-startup "noctalia"
