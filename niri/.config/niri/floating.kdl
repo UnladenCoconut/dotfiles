@@ -1,0 +1,6 @@
+window-rule {
+    open-floating true
+    //need at least one match rule () so not global
+    match app-id="^$"
+    match app-id="Leo-rover-controller"
+}

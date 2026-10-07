@@ -578,8 +578,11 @@ binds {
     // Move the focused window between the floating and the tiling layout.
     Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-
-    // Toggle tabbed column display mode.
+    
+		//permanently make the focused window app floating/tiled
+		Mod+Alt+V		{ spawn-sh "~/.config/niri/toggle-floating.sh"; }
+    
+		// Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
     Mod+W { toggle-column-tabbed-display; }
@@ -625,6 +628,7 @@ output "eDP-1" {
 
 environment {
 	QT_QPA_PLATFORM "xcb"
+	QT_QPA_PLATFORMTHEME "qt6ct"
 }
 
 spawn-sh-at-startup "swaybg -i ~/.local/share/wallpapers/chrysanthemum.jpg"
@@ -641,3 +645,5 @@ spawn-sh-at-startup "keyd bind 'leftmeta = overload(meta, macro(leftmeta+leftshi
 spawn-at-startup "wl-clip-persist -c regular"
 spawn-sh-at-startup "QT_QPA_PLATFORM=wayland flameshot"
 spawn-sh-at-startup "noctalia"
+
+include "floating.kdl"
