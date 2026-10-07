@@ -317,11 +317,6 @@ window-rule {
 }
 
 window-rule {
-	match app-id="^flameshot$"
-	open-fullscreen true
-}
-
-window-rule {
 	match app-id="^Windscribe2$"
 	open-floating true
 	draw-border-with-background false
@@ -596,8 +591,8 @@ binds {
     // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
     Mod+Space { spawn-sh "niri msg action switch-layout next"; }
 
-    Print { spawn-sh "QT_QPA_PLATFORM=wayland flameshot gui -r | wl-copy"; }
-    Ctrl+Print { spawn-sh "QT_QPA_PLATFORM=wayland flameshot screen -r | wl-copy"; }
+    Print { spawn-sh "noctalia msg screenshot-annotate"; }
+    Ctrl+Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
     Alt+Print { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
@@ -639,7 +634,7 @@ output "HDMI-A-1" {
     scale 1.0
 
     transform "normal"
-    position x=1920 y=-277
+    position x=1920 y=-637
 }
 
 spawn-sh-at-startup "keyd bind 'leftmeta = overload(meta, macro(leftmeta+leftshift+space))'"

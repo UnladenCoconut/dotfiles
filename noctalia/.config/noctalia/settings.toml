@@ -1,17 +1,88 @@
+config_version = 14
+
+[bar.default]
+center = [ "media", "spacer_2", "clock" ]
+end = [
+    "tray",
+    "spacer_3",
+    "notifications",
+    "clipboard",
+    "network",
+    "bluetooth",
+    "volume",
+    "brightness",
+    "battery",
+    "brightness",
+    "session"
+]
+margin_ends = 0
+
 [theme]
 mode = "dark"
 shell_mode = "follow"
 source = "community"
 community_palette = "Cherry Blossom"
 
+[calendar]
+enabled = true
+
+    [calendar.account.google]
+    type = "google"
+
+[control_center]
+hidden_tabs = [ "weather" ]
+sidebar_section = "none"
+
+[desktop_widgets]
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000001" ]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 2236.0
+    cy = 253.0
+    output = "HDMI-A-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "calendar"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1596.0
+    cy = 255.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "calendar"
+
 [shell]
 font_family = "JetBrainsMono NF"
 telemetry_enabled = true
 
     [shell.launcher]
+		categories = false
     app_grid = true
     fetch_exchange_rates = false
-    pinned = [ "nemo" ]
+    pinned = [ "nemo", "io.github.nirimod", "tidal-hifi" ]
+
+    [shell.panel]
+    control_center_placement = "floating"
+    open_near_click_control_center = true
+
+    [shell.screenshot]
+    confirm_region = true
+
+[lockscreen]
+transition_duration = 300
 
 [wallpaper]
 directory = "~/.local/share/wallpapers"
@@ -19,6 +90,35 @@ directory = "~/.local/share/wallpapers"
 [wallpaper.default]
 path = "~/.local/share/wallpapers/chrysanthemum.jpg"
 
+[widget.brightness]
+show_when_unavailable = true
+
 [widget.clock]
 format = "{:%H:%M %D}"
+
+    [widget.clock.actions]
+    left = "panel-toggle control-center Home"
+
+[widget.network]
+show_label = false
+
+[widget.spacer_2]
+type = "spacer"
+
+[widget.spacer_3]
+type = "spacer"
+
+[widget.tray]
+capsule = true
+capsule_border = "tertiary"
+
+[notification]
+background_opacity = 1.0
+border_color = "primary"
+layer = "overlay"
+filter_order = ["global"]
+
+	[notification.filter.global]
+	match_content = "."
+	override_duration = 2000
 
