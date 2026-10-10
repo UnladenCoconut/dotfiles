@@ -3,4 +3,6 @@ window-rule {
     //need at least one match rule () so not global
     match app-id="^$"
     match app-id="Leo-rover-controller"
+    match app-id="org.gazebosim.ruby3"
+    match app-id="Team3.leorover.guicontroller"
 }

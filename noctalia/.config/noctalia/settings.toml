@@ -1,27 +1,22 @@
-config_version = 14
-
 [bar.default]
+border = "surface"
+capsule_thickness = 0.89999998360872269
 center = [ "media", "spacer_2", "clock" ]
 end = [
     "tray",
-    "spacer_3",
+    "settings",
+    "volume",
     "notifications",
     "clipboard",
     "network",
     "bluetooth",
-    "volume",
     "brightness",
     "battery",
-    "brightness",
+    "keyboard_layout",
     "session"
 ]
 margin_ends = 0
-
-[theme]
-mode = "dark"
-shell_mode = "follow"
-source = "community"
-community_palette = "Cherry Blossom"
+start = [ "launcher", "wallpaper", "workspaces", "caffeine" ]
 
 [calendar]
 enabled = true
@@ -35,7 +30,7 @@ sidebar_section = "none"
 
 [desktop_widgets]
 schema_version = 2
-widget_order = [ "desktop-widget-0000000000000001" ]
+widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-0000000000000002" ]
 
     [desktop_widgets.grid]
     cell_size = 16
@@ -46,7 +41,7 @@ widget_order = [ "desktop-widget-0000000000000001" ]
     box_height = 0.0
     box_width = 0.0
     cx = 2236.0
-    cy = 253.0
+    cy = 259.0
     output = "HDMI-A-1"
     placement_height = 1440.0
     placement_width = 2560.0
@@ -54,25 +49,106 @@ widget_order = [ "desktop-widget-0000000000000001" ]
     type = "calendar"
 
     [desktop_widgets.widget.desktop-widget-0000000000000002]
-    box_height = 0.0
-    box_width = 0.0
-    cx = 1596.0
-    cy = 255.0
+    box_height = 160.0
+    box_width = 384.0
+    cx = 2240.0
+    cy = 576.0
+    output = "HDMI-A-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "media_player"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
+        hide_when_no_media = true
+        layout = "horizontal"
+
+[lockscreen]
+transition_duration = 300
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1280.0
+    cy = 1258.0
+    output = "HDMI-A-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
     rotation = 0.0
-    type = "calendar"
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[notification]
+background_opacity = 0.99999997764825821
+border_color = "primary"
+filter_order = [ "global" ]
+layer = "overlay"
+
+    [notification.filter.global]
+    match_content = "."
+    override_duration = 2000
 
 [shell]
 font_family = "JetBrainsMono NF"
 telemetry_enabled = true
 
     [shell.launcher]
-		categories = false
     app_grid = true
+    categories = false
     fetch_exchange_rates = false
-    pinned = [ "nemo", "io.github.nirimod", "tidal-hifi" ]
+    pinned = [ "nemo", "io.github.nirimod", "tidal-hifi", "firefox_firefox", "thunar" ]
 
     [shell.panel]
     control_center_placement = "floating"
@@ -81,14 +157,20 @@ telemetry_enabled = true
     [shell.screenshot]
     confirm_region = true
 
-[lockscreen]
-transition_duration = 300
+[theme]
+community_palette = "Cherry Blossom"
+mode = "dark"
+shell_mode = "follow"
+source = "community"
+
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "kcolorscheme", "qt" ]
 
 [wallpaper]
 directory = "~/.local/share/wallpapers"
 
-[wallpaper.default]
-path = "~/.local/share/wallpapers/chrysanthemum.jpg"
+    [wallpaper.default]
+    path = "~/.local/share/wallpapers/chrysanthemum.jpg"
 
 [widget.brightness]
 show_when_unavailable = true
@@ -111,14 +193,4 @@ type = "spacer"
 [widget.tray]
 capsule = true
 capsule_border = "tertiary"
-
-[notification]
-background_opacity = 1.0
-border_color = "primary"
-layer = "overlay"
-filter_order = ["global"]
-
-	[notification.filter.global]
-	match_content = "."
-	override_duration = 2000
-
+capsule_fill = "on_primary"
