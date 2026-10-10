@@ -68,6 +68,9 @@ input {
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     focus-follows-mouse max-scroll-amount="0%"
+
+		//handle with logind instead
+		disable-power-key-handling
 }
 
 overview {
@@ -352,8 +355,6 @@ binds {
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
-
-		XF86PowerOff allow-when-locked=true { spawn "poweroff"; }
     
 		// Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -645,5 +646,6 @@ spawn-sh-at-startup "keyd bind 'leftmeta = overload(meta, macro(leftmeta+leftshi
 spawn-at-startup "wl-clip-persist -c regular"
 spawn-sh-at-startup "QT_QPA_PLATFORM=wayland flameshot"
 spawn-sh-at-startup "noctalia"
+spawn-sh-at-startup "systemctl start --user thunar"
 
 include "floating.kdl"
