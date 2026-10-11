@@ -6,3 +6,6 @@ sudo stow .root -t /
 sudo usermod -aG keyd $(whoami)
 systemctl enable --now keyd
 systemctl daemon-reload
+
+#fix for deadlock and other games
+sudo sysctl -w vm.max_map_count=16777216

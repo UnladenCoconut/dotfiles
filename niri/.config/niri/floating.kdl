@@ -5,4 +5,5 @@ window-rule {
     match app-id="Leo-rover-controller"
     match app-id="org.gazebosim.ruby3"
     match app-id="Team3.leorover.guicontroller"
+    match app-id="Gazebo GUI"
 }
